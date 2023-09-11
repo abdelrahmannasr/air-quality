@@ -32,6 +32,26 @@
 $ npm install
 ```
 
+## ENV File
+
+Create .env file in the root folder with the below variables
+
+```bash
+# Database configuration
+MONGODB_URI=Your MongoDB URI
+
+# Server configuration
+PORT=3000
+
+# API Keys and Secrets
+API_KEY=Your Air Quality API KEY
+
+# Cron configurations
+INTERVAL_SECONDS=45
+LOCATION_LATITUDE=48.856613
+LOCATION_LONGITUDE=2.352222
+```
+
 ## Running the app
 
 ```bash
@@ -58,15 +78,10 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Swagger
+http://localhost:3000/swagger#/
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<img width="1512" alt="Screenshot 2023-09-11 at 3 04 22 AM" src="https://github.com/abdelrahmannasr/air-quality/assets/37974483/ee14df40-86d3-4484-bcce-e35e092fdc4d">
 
 ## License
 
