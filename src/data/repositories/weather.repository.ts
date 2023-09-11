@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { Constants } from '../common';
 import { HttpService } from '@nestjs/axios';
 import { Mapper } from '../../utilities';
@@ -16,8 +22,7 @@ export class WeatherRepository {
   ) {}
 
   public async addWeather(data: Weather): Promise<Weather> {
-    const weather = new this.weatherModel(data);
-    return weather.save();
+    return await this.weatherModel.create(data);
   }
 
   public async findAllWeather(): Promise<Weather[]> {
@@ -36,13 +41,11 @@ export class WeatherRepository {
             reject(
               new HttpException(`Location is not found`, HttpStatus.NOT_FOUND),
             );
-          console.log(response.data.data);
-
-          resolve(Mapper.toClient(Weather, response.data.data));
+          return resolve(Mapper.toClient(Weather, response.data.data));
         });
       } catch (error) {
         this.logger.error('Error fetching object:', error.message);
-        reject(error);
+        return reject(new InternalServerErrorException());
       }
     });
   }

@@ -22,15 +22,19 @@ export class AppService {
           this.weatherRepository.getAirQualityByLocation(latitude, longitude),
         );
       } catch (error) {
-        this.logger.error(error);
         return reject(new InternalServerErrorException());
       }
     });
   }
 
-  public async getAllWeather() {
-    const allWeather = await this.weatherRepository.findAllWeather();
-    return allWeather;
+  public async getAllWeather(): Promise<Weather[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        return resolve(this.weatherRepository.findAllWeather());
+      } catch (error) {
+        return reject(new InternalServerErrorException());
+      }
+    });
   }
 
   @Cron(`${Constants.INTERVAL_SECONDS} * * * * *`)

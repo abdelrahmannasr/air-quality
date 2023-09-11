@@ -2,17 +2,33 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { LocationType } from '../common';
 import { Expose } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Schema()
 export class Weather {
+  @ApiProperty({
+    example: 'Paris',
+    description: 'City',
+    required: true,
+  })
   @Prop({ required: true })
   @Expose()
   city: string;
 
+  @ApiProperty({
+    example: 'Ile-de-France',
+    description: 'State',
+    required: true,
+  })
   @Prop({ required: true })
   @Expose()
   state: string;
 
+  @ApiProperty({
+    example: 'France',
+    description: 'Country',
+    required: true,
+  })
   @Prop({ required: true })
   @Expose()
   country: string;
@@ -30,6 +46,10 @@ export class Weather {
     },
   })
   @Expose()
+  @ApiProperty({
+    description: 'Location',
+    required: true,
+  })
   location: {
     type: string;
     coordinates: [number, number];
@@ -57,6 +77,10 @@ export class Weather {
     required: true,
   })
   @Expose()
+  @ApiProperty({
+    description: 'Current',
+    required: true,
+  })
   current: {
     pollution: {
       ts: string;
